@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter your position</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+          crossorigin="anonymous">
+    <style>
+        .container {
+            margin-top: 30px;
+        }
+
+        .search-message {
+            margin-right: 20px;
+            padding-top: 7px;
+        }
+
+        .search-area {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+    <h3>Hi, enter your position in the follow form, please.</h3><br/>
+
+    <div class="search-area">
+        <form action="/api/shops" role="search" @submit.prevent="searchShops()">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="username">Your name</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" v-model="form.username" id="username" required>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="lat">Latitude</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="number" class="form-control"
+                           v-model="form.lat" id="lat"
+                           step="any" min="-180" max="180" required>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="lng">Longitude</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="number" class="form-control"
+                           v-model="form.lng" id="lng"
+                           step="any" min="-90" max="90" required>
+                </div>
+            </div>
+            <small class="float-right">
+                For testing you might use following coordinates: (lat: 60.070457, lng: 30.3275233) it is Russia,
+                Saint-Petersburg, m.Parnas
+            </small><br/>
+            <button type="submit" class="btn btn-success float-right" :disabled="isSubmitButtonLocked">
+                Search shops
+            </button>
+            <span class="search-message float-right" v-show="isSubmitButtonLocked">Searching...</span>
+        </form>
+    </div>
+    <br/>
+
+    <div class="search-results" v-if="availableShops.length > 0">
+        <h3>Follow shops are available for you</h3><br/>
+
+        <ol>
+            <li v-for="shop in availableShops">
+                {{ shop.name }}, shop is work. Work time {{ workTime(shop) }}.
+                The store is located about {{ shop.distanceInKm | distance }} km from you.
+            </li>
+        </ol>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/app/app.js"></script>
+
+</body>
+</html>
