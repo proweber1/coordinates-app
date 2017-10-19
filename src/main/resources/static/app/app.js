@@ -44,10 +44,10 @@ new Vue({
                 .then(function (response) {
                     that.availableShops = response.data;
                 }).catch(function (error) {
-                alert('Server error, please try later');
-            }).then(function () {
-                that.isSubmitButtonLocked = false;
-            });
+                    alert('Server error, please try later');
+                }).then(function () {
+                    that.isSubmitButtonLocked = false;
+                });
         },
 
         /**
