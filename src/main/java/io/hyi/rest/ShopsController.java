@@ -20,8 +20,7 @@ public class ShopsController {
     private final NearestShopsProvider nearestShopsProvider;
 
     @Autowired
-    public ShopsController(
-                           ApplicationEventPublisher eventPublisher,
+    public ShopsController(ApplicationEventPublisher eventPublisher,
                            NearestShopsProvider nearestShopsProvider) {
 
         this.eventPublisher = eventPublisher;
