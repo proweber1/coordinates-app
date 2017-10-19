@@ -3,7 +3,7 @@
 Зависимости проекта
 
  - Java 8
- - PostgreSQL
+ - PostgreSQL 9.6+
 
 ### Запуск
 
